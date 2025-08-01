@@ -1,78 +1,107 @@
-package Day4.HandsOn;
+package Day2;
 
 import java.util.Scanner;
 
 class Employee{
 	private int id;
-	private String name;
-	private double salary;
+	private String firstName;
+	private String lastName;
+	private int salary;
 	
-	public Employee(int _id,String _name,double _salary) {
-		id = _id;
-		name = _name;
-		salary = _salary;
+	public Employee(int id, String firstName, String lastName, int salary) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.salary = salary;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getFirstName() {
+		return firstName;
 	}
 	
-	public double calculateYearlySalary(double monthlySalary) {
-		return monthlySalary * 12;
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
 	}
 	
-	public double calculateYearlySalary(double dailySalary, int workingDays) {
-		return dailySalary * workingDays;
+	public String getName() {
+		return firstName +" " +lastName;
 	}
 	
-	public double calculateYearlySalary(int workingDays, double hourlySalary,int hoursPerDay) {
-		return workingDays * hoursPerDay * hourlySalary;
+	public int getAnnualSalary() {
+		return salary * 12;
+	}
+	
+	public int SetRaiseSalary(int percent) {
+		int newSalary = (salary + ((salary * percent)/100));
+		return newSalary;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary
+				+ "]";
 	}
 	
 }
-
 
 public class program2 {
 
 	public static void main(String[] args) {
 		
+		// Getting input from the user.
+		
 		Scanner in = new Scanner(System.in);
-		System.out.println("Enter the ID");
-		int id = in.nextInt();
-		System.out.println("Enter The name");
-		String name = in.next();
+		
+		System.out.println("Enter the first name");
+		String _firstName = in.nextLine();
+		System.out.println("Enter the last name");
+		String _lastName = in.nextLine();
 		System.out.println("Enter the salary");
-		double salary = in.nextDouble();
+		int _salary = in.nextInt();
+		System.out.println("Enter the bonus Amount in percent");
+		int _bonus = in.nextInt();
+		System.out.println("Enter the id");
+		int _id = in.nextInt();
 		
-		Employee emp = new Employee(id,name,salary);
+		// setting the user input
+		Employee emp = new Employee(_id,_firstName,_lastName,_salary);
 		
-		double salary1 = emp.calculateYearlySalary(100000.0);
-		System.out.println("Yearly salary (Monthly basics): "+salary1);
+		// displaying the user input.
+		System.out.println("Employee Details");
+		System.out.println("Id "+emp.getId()+" FirstName "+emp.getFirstName()+" LastName "+emp.getLastName()+" Salary "+emp.getSalary());
+		System.out.println("Annual Salary : "+emp.getAnnualSalary());
+		System.out.println("Bonus Salary "+emp.SetRaiseSalary(_bonus));
 		
-		double salary2 = emp.calculateYearlySalary(500.0, 250);
-        System.out.println("Yearly Salary (Daily basis): " + salary2);
-
-        double salary3 = emp.calculateYearlySalary(250, 100.0, 8);
-        System.out.println("Yearly Salary (Hourly basis): " + salary3);
-        
-        System.out.println(emp);
-			
-		
+		in.close();
 	}
 
 }
 
-/**
-Enter the ID
-1
-Enter The name
+/* --------- output :----------
+ * Enter the first name
 kumar
+Enter the last name
+dk
 Enter the salary
 100000
-Yearly salary (Monthly basics): 1200000.0
-Yearly Salary (Daily basis): 125000.0
-Yearly Salary (Hourly basis): 200000.0
-Employee [id=1, name=kumar, salary=100000.0]
-
+Enter the bonus Amount in percent
+10
+Enter the id
+101
+Employee Details
+Id 101 FirstName kumar LastName dk Salary 100000
+Annual Salary : 1200000
+Bonus Salary 110000
 */

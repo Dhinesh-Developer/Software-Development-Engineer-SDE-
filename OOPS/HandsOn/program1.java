@@ -1,82 +1,48 @@
-package Day4.HandsOn;
+package Day2;
 
-class Circle{
-	private double radius;
-	private String color = "red";
-	public static final double PI = 3.14;
+import java.util.Scanner;
+
+class Rectangle{
+	private float length = 1.0f;
+	private float width = 1.0f;
 	
-	public Circle() {
-	}
-	
-	public Circle(double radius) {
-		super();
-		this.radius = radius;
+	public Rectangle() {
 	}
 	
-	public Circle(double radius, String color) {
-		super();
-		this.radius = radius;
-		this.color = color;
+	public Rectangle(float length,float width) {
+		this.length = length;
+		this.width = width;
 	}
-
-	public double getRadius() {
-		return radius;
+	
+	public void setLength(float length) {
+		this.length = length;
 	}
-
-	public void setRadius(double radius) {
-		this.radius = radius;
+	
+	public void setWidth(float width) {
+		this.width = width;
 	}
-
-	public String getColor() {
-		return color;
+	
+	public float getLength() {
+		return length;
 	}
-
-	public void setColor(String color) {
-		this.color = color;
+	
+	public float getWidth() {
+		return width;
 	}
 	
 	public double getArea() {
-		return PI * radius * radius;
+		double area = length * width;
+		return area;
 	}
-
+	
+	public double getPerimeter() {
+		double perimeter = 2 * (length+width);
+		return perimeter;
+	}
+	
 	@Override
 	public String toString() {
-		return "Circle [radius=" + radius + ", color=" + color + "]";
-	}
-
-}
-
-class Cylinder extends Circle{
-	
-	private double height = 1.0;
-	
-	public Cylinder() {
-	}
-	
-	Cylinder(double radius){
-		setRadius(radius);
-	}
-	
-	Cylinder(double radius,double height){
-		super(radius);
-		this.height = height;
-	}
-	
-	Cylinder(double radius,double height,String color){
-		super(radius,color);
-		this.height = height;
-	}
-	
-	public double getHeight() {
-		return height;
-	}
-	
-	public void setHeight(double height) {
-		this.height = height;
-	}
-	
-	public double getVolume() {
-		return PI * getRadius() * getRadius() * height;
+		return "Rectangle [length=" + length + ", width=" + width + "]";
 	}
 	
 }
@@ -85,49 +51,27 @@ public class program1 {
 
 	public static void main(String[] args) {
 		
-		 // Testing circle
-        Circle c1 = new Circle(); 
-        c1.setRadius(5);
-        c1.setColor("blue");
-        System.out.println("Circle Radius: " + c1.getRadius());
-        System.out.println("Circle Color: " + c1.getColor());
-        System.out.println("Circle Area: " + c1.getArea());
-        System.out.println(c1); 
-
-        System.out.println("----------------------");
-
-        // testing cylinder
-        Cylinder cy1 = new Cylinder();
-        cy1.setRadius(4);
-        cy1.setHeight(10);
-        System.out.println("Cylinder Radius: " + cy1.getRadius());
-        System.out.println("Cylinder Height: " + cy1.getHeight());
-        System.out.println("Cylinder Volume: " + cy1.getVolume());
-
-        System.out.println("----------------------");
-
-        Cylinder cy2 = new Cylinder(3.0, 7.0, "green");
-        System.out.println("Radius: " + cy2.getRadius());
-        System.out.println("Height: " + cy2.getHeight());
-        System.out.println("Color: " + cy2.getColor());
-        System.out.println("Volume: " + cy2.getVolume());
+		Rectangle rect = new Rectangle();
+		
+		// Getting the user input
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the Length");
+		float length = in.nextFloat();
+		System.out.println("Enter the Width");
+		float width = in.nextFloat();
+		
+		// setting the length, width 
+		rect.setLength(length);
+		rect.setWidth(width);
+		
+		// displaying the output.
+		System.out.println("Length of the Rectangle "+rect.getLength());
+		System.out.println("width of the Rectangle "+rect.getWidth());
+		System.out.println("Area of the Rectangle "+rect.getArea());
+		System.out.println("perimeter of the Rectangle "+rect.getPerimeter());
+		
+		in.close();
 		
 	}
 
 }
-/* -------------------- OUTPUT ---------------------
-Circle Radius: 5.0
-Circle Color: blue
-Circle Area: 78.5
-Circle [radius=5.0, color=blue]
-----------------------
-Cylinder Radius: 4.0
-Cylinder Height: 10.0
-Cylinder Volume: 502.40000000000003
-----------------------
-Radius: 3.0
-Height: 7.0
-Color: green
-Volume: 197.82
-
- * */

@@ -1,48 +1,64 @@
-package Day4.HandsOn;
+package Day2;
 
-interface FlightBooking{
-	void bookTicket();
-	void cancelTicket();
-}
+import java.util.Scanner;
 
-class Indigo implements FlightBooking{
-
-	@Override
-	public void bookTicket() {
-		System.out.println("Indigo AirPlane ticket Booked");
+class Account{
+	private String id;
+	private String name;
+	private int balance = 0;
+	
+	public Account(String id, String name, int balance) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.balance = balance;
 	}
-
-	@Override
-	public void cancelTicket() {
-		System.out.println("Indigo AirPlane ticket Cancelled");
+	public Account(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
 	}
 	
-}
-
-class AirIndia implements FlightBooking{
-
-	@Override
-	public void bookTicket() {
-		System.out.println("AirIndia AirPlane ticket Booked");
+	
+	public String getId() {
+		return id;
 	}
-
-	@Override
-	public void cancelTicket() {
-		System.out.println("AirIndia AirPlane ticket Cancelled");
+	public String getName() {
+		return name;
+	}
+	public int getBalance() {
+		return balance;
 	}
 	
-}
-
-class SpiceJet implements FlightBooking{
-
-	@Override
-	public void bookTicket() {
-		System.out.println("SpiceJet AirPlane ticket Booked");
+	public int credit(int amount) {
+		if(amount > 0) {
+			balance += amount;
+		}else {
+			System.out.println("Insufficeint money to add");
+		}
+		return balance;
 	}
-
+	
+	public int debit(int amount) {
+		if(amount <= balance) {
+			balance -= amount;
+		}else {
+			System.out.println("Amount exceeded balance");
+		}
+		return balance;
+	}
+	
+	public int transferTo(String accountId,int amount) {
+		if(amount <= balance) {
+			System.out.println("Transfered "+amount+ " To "+accountId);
+		}else {
+			System.out.println("Amount exceeded balance");
+		}
+		return balance;
+	}
 	@Override
-	public void cancelTicket() {
-		System.out.println("SpiceJet AirPlane ticket Cancelled");
+	public String toString() {
+		return "Account [id=" + id + ", name=" + name + ", balance=" + balance + "]";
 	}
 	
 }
@@ -51,18 +67,35 @@ public class program3 {
 
 	public static void main(String[] args) {
 		
-		Indigo fb = new Indigo();
-		fb.bookTicket();
-		fb.cancelTicket();
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the id");
+		String _id = in.nextLine();
+		System.out.println("Enter the name");
+		String _name = in.nextLine();
+		System.out.println("Enter the balance");
+		int _balance = in.nextInt();
 		
-		AirIndia ai = new AirIndia();
-		ai.bookTicket();
-		ai.cancelTicket();
+		Account acc = new Account(_id,_name,_balance);
+		System.out.println("ID : "+acc.getId());
+		System.out.println("Name : "+acc.getName());
+		System.out.println("Balance : "+acc.getBalance());
 		
-		SpiceJet sj = new SpiceJet();
-		sj.bookTicket();
-		sj.cancelTicket();
+		System.out.println("Enter the amount to credit ");
+		int _creditAmount = in.nextInt();
+		System.out.println("Balance "+acc.credit(_creditAmount));
 		
+		
+		System.out.println("Enter the amount to debit ");
+		int _debitAmount = in.nextInt();
+		System.out.println("Balance "+acc.debit(_debitAmount));
+		
+		System.out.println("Enter the Id to transfer the Money ");
+		String _transferId = in.nextLine();
+		System.out.println("Enter the Amount to Transfer ");
+		int _transferAmount = in.nextInt();
+		System.out.println("Transfered "+_transferAmount+" To "+_transferId);
+	
+		in.close();
 	}
 
 }
