@@ -1,0 +1,2 @@
+Welcome This from input.txt
+Hai This is Dhinesh.
